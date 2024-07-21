@@ -7,33 +7,28 @@ const CAT_PREFIX_IMAGE_URL = "https://cataas.com"
 export function App() {
   const [fact, setFact] = useState()
   const [imageUrl, setImageUrl] = useState()
+
+  // get the fact
   useEffect(() => {
     fetch(CAT_ENDPOINT_RANDOM_FACT)
       .then(res => res.json())
       .then(data => {
         const { fact } = data
         setFact(fact)
-
-        const threeFirstWords = fact.split(" ",3).join(" ")
-        console.log(threeFirstWords) 
-        const imageUrlFetch = `https://cataas.com/cat/says/${threeFirstWords}?fontSize=50&fontColor=red`
-
-        fetch(`https://cataas.com/cat/says/${threeFirstWords}?Size=50?fontSize=50&fontColor=red`)
-          .then(response => {
-            const { url } = response
-            setImageUrl(url)
-            console.log(url)
-              
-          })
       })
   }, [])
+  // get image
+  useEffect(() => {
+    if (!fact) return 
+    const threeFirstWords = fact.split(" ",3).join(" ")
 
-  /*useEffect(() => {
-    fetch(cat)
-      .then(res => res.json())
-      .then(data => setFact(data))
-  },[])
-*/
+    fetch(`https://cataas.com/cat/says/${threeFirstWords}?size=50?fontSize=50&fontColor=red`)
+      .then(response => {
+        const { url } = response
+        setImageUrl(url)
+      })
+  }, [fact])
+
   return (
     <main>
       <h1>App de gatitos</h1>
