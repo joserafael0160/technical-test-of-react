@@ -9,6 +9,9 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@playwright/test": "^1.45.3",
+    "@types/bun": "latest",
+    "@types/node": "^20.14.11",
     "vite": "^5.3.1"
   },
   "dependencies": {
@@ -18,5 +21,9 @@
   },
   "eslintConfig": {
     "extends": "./node_modules/standard/eslintrc.json"
+  },
+  "module": "index.ts",
+  "peerDependencies": {
+    "typescript": "^5.0.0"
   }
 }
